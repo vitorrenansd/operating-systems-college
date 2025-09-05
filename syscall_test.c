@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
+// Returns process PID
 int main() {
     printf("PID: %d\n", getpid());
 
