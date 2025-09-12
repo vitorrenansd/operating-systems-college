@@ -44,6 +44,8 @@ int main() {
     // Reset the shared counter to 0 before running the atomic version
     shared_counter = 0;
 
+    printf("Testing atomic...\n");
+
     // Create NUM_THREADS threads to increment atomic_counter (using atomic operations)
     for (int i = 0; i < NUM_THREADS; i++) {
         pthread_create(&threads[i], NULL, atomic_incrementer, NULL);
