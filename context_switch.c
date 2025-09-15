@@ -24,16 +24,12 @@ int main() {
     cpu_set_t cpuset;
 
     CPU_ZERO(&cpuset);
-    
-    // Set the CPU affinity to CPU 0 for all threads
     CPU_SET(0, &cpuset);
     
-    // Set the CPU affinity of the main thread (process) to the CPU 0
     sched_setaffinity(0, sizeof(cpuset), &cpuset);
 
     // Create NUM_THREADS threads and assign them the worker function
     for (long i = 0; i < NUM_THREADS; i++) {
-        // Create a new thread, passing the thread index as the argument
         pthread_create(&threads[i], NULL, worker, (void*)i);
     }
 
