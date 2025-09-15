@@ -2,11 +2,10 @@
 
 #include <stdio.h>
 #include <pthread.h>
-#include <sched.h>  // For CPU affinity functions
+#include <sched.h>
 
 #define NUM_THREADS 16 
 
-// Worker function that each thread will run
 void *worker(void *arg) {
     long id = (long)arg;  
     volatile int counter = 0;
@@ -16,7 +15,6 @@ void *worker(void *arg) {
         counter += i % 100;
     }
 
-    // Print the ID of the thread that finished its work
     printf("Thread %ld finished\n", id);
     return NULL;
 }
@@ -45,3 +43,15 @@ int main() {
 
     return 0;
 }
+
+/*
+# Compile with debug symbols:
+gcc -g -o context_switch context_switch.c -lpthread
+
+# Show context switches:
+sudo perf stat -e context-switches,cpu-migrations ./context_switch
+
+# Scheduler profile:
+sudo perf record -e sched:sched_switch,sched:sched_stat_wait ./context_switch
+sudo perf script | head -20
+*/
