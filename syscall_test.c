@@ -15,3 +15,9 @@ int main() {
     getchar();
     return 0;
 }
+
+/*
+# Analyze
+sudo perf trace -e raw_syscalls:sys_enter,
+raw_syscalls:sys_exit ./syscall_test
+*/
